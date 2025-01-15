@@ -1,146 +1,32 @@
-computational Thinking. 
+package firstapp;
 
+public class ForLoopDemo {
+	
+	public static void main(String[] args) {
+		
+		String[] cars= {"merc","BMW","Ford"};
+		int [] userAge= {22,34,54,12,10};
+		for(String carData: cars) {
+			//System.out.println(carData);
+		}
+		
+		for(int ages: userAge) {
+			//System.out.println("User Age "+ ages);
+		}
+		// get the length of array
+		System.out.println(userAge.length);
+		// store the first array element
+		int lowestAge=userAge[0];
+		//loop through the elements of the userage to find the lowest age
+		for(int age:userAge) {
+			//check if the current age is smaller than the "Lowestage"
+			if(lowestAge > age) {
+				// if the smaller age is found update the "lowest age" element
+				lowestAge =age;
+			}
+		}
+		System.out.println("The Lowest age found is "+ lowestAge);
+		
+	}
 
-to solve problems. -> ways to solve /tackle it
-
-
-Pickup a problem -> multiple sols
-
-
-computational Thinking>
- four key tech
-
-1)decomposition ->breaking your app /problem into smaller manage parts
-
-2) pattern reco->looking for simi among and within problems
-
-3) abstraction-> OOPS
-
-4) algorithm -> dev step by step sol of the problem
-
-
-1) solving problems
-2) optimizing Solutions
-3) Automating the tasks
-------------------
-points and imp notes of algo
-
-1) it should be defined clearly
-2) algo should produce atleast one output
-3) zero or more inputs
-4) executed and finished in finite no of steps
-5) basic and easy to perform
-6) step started with a specific indention like "step-1"
-7) thr must be Start and the final step like END
-
-
------
-Use Case ( To make a cup of coffee)
-
-step 1 : Start
-2 
-3
-4
-----
-step 11 : END
---------
-Task: Swap two numbers with a third variable
-Step:1 Start
-Step:2 Take 2 numbers as input
-Step:3 Declare another var as "temp"
-Step:4 store the first var to "Temp"
-Step:5 Store the sec var to the first var
-Step:6 Store the "temp" var to the 2nd var
-Step:7: Print the first and sec var
-Step:8: END
-
-
-------------
-Find the greatest between 3 numbers
-
-Step:1 Start
-Step:2 Take 3 numbers as input say A,B,c
-Step:3 CHeck if(A>B and A>C)
-Step:4 Then A is greater
-Step:5 Print A
-Step:6 Else
-Step:7: CHeck if(B>A and B>C)
-Step:8: Then B is greater
-Step:9 Print B
-Step:10 Else C is greater
-Step:11: Print C
-Step:12: End
-
-
-
-
-Check whether a number is prime or not
-
-
-Step:1 Start
-Step:2 Declare var n,i,flag
-Step:3 initialize var
-          flag<--1
-	  i<-2
-Step:4 Read n from user
-Step:5 repeat the steps until i=(n/2)
-     5.1  if remainder of n+1 equals 0
-         
-Step:6 Else
-Step:7: CHeck if(B>A and B>C)
-
-
----------------------
-
-
-  Algorithm ---> PseudoCode (Eng language)-------> Program
-
-
-
-if "1"
-print response
- " i am case 1"
-
-if "2"
-print response
- " i am case 2"
-
--------------------------
-
-pseudo code
-Read num1,num2
-Set multi to num1*num2
-Write multi
-
------------
-
-Read isFive
-if(isFive=5)
-	write "your no is 5"
-else if(isFive=6)
-write "your no is 6"
-else
-write "your no is not 5 or 6"
-
----------------------
-Read isFive
-if(isFive=5 or isFive=6)
-	write "your no is a 5 or 6"
-else
-write "your no is not 5 or 6"
-
-----------
-Read isFive
-if(isFive is not 5 and isFive is not 6)
-write "your no is not 5 or 6"
-
--------------
-write a pc to print all multiples of 5 between 1 and 100(
-including both 1 and 100)
-
-
-
-
-
-
-
+}
