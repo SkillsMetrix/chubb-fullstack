@@ -1,0 +1,80 @@
+package bank;
+
+public class Banking {
+
+	private int balanceAmount = 300;
+	private String sourceBankName;
+
+	private int srcAccountBalance = 100;
+
+	private int destAccountBalance = 200;
+
+	public void checkBalance() {
+
+		System.out.println(balanceAmount);
+
+	}
+
+	void witdrawAmount(String sourceBankName, int amount) {
+		if (amount > balanceAmount) {
+			System.out.println("please enter correct amount");
+		} else {
+			balanceAmount = balanceAmount - amount;
+			System.out.println("deducting the balance from" + sourceBankName + " " + "....! wait");
+		}
+
+	}
+
+	void depositAmount(String sourceBankName, int amount) {
+		System.out.println("adding the balance to the" + sourceBankName + " ");
+		if (amount > 2000) {
+			System.out.println("limit exceded of the amount");
+		} else {
+			balanceAmount = balanceAmount + amount;
+
+		}
+
+	}
+
+	// fund trans
+	void transferFunds(int srcAccount, int destAccount, int amount) {
+		System.out.println("The First Person Balance " + srcAccountBalance);
+		System.out.println("The Sec Person Balance " + destAccountBalance);
+
+		srcAccountBalance = srcAccountBalance - amount;
+		destAccountBalance = destAccountBalance + amount;
+
+		System.out.println("The First Person Balance after Transfer" + srcAccountBalance);
+		System.out.println("The Second Person Balance after Transfer " + destAccountBalance);
+
+	}
+
+}
+-------------------
+
+
+package bank;
+
+public class BankingMain {
+	
+	public static void main(String[] args) {
+		
+		// creating an object of Banking
+		
+		Banking boa= new Banking();
+		
+		boa.transferFunds(101, 102, 50);
+		 
+		//boa.witdrawAmount(200);
+	     // boa.checkBalance();
+		 // boa.depositAmount(args[0],Integer.parseInt(args[1]));
+		  //boa.checkBalance();
+
+
+		
+		
+	
+		
+	}
+
+}
