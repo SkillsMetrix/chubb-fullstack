@@ -1,0 +1,35 @@
+private--->default---> protected---->public
+
+classes and methods -> Public
+variable -> private
+
+object oriented prog:
+--------
+1) what is a super class in java : Object ( useful methods)
+2) which package is by default available : java.lang (useful classes)
+
+Class (data and methods) (Template) (set of rules)
+Object  reprensetation -> BOA --> follow the rules
+-------------
+
+class Bank{
+
+      balanceAmount=300
+
+  showBalance(){
+        print(balanceAmount)
+
+   deposit(int amount)
+          balanceAmount+amount
+
+    withdraw(int amount)
+       balanceAmount-amount
+
+--------------------
+
+method return   (int ,float , double) 
+method does not return (void) -> display the data
+
+
+fundTRansfer(srcAccNo,amtToTransfer,destAccNo)
+
