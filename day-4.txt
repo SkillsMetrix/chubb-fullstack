@@ -1,0 +1,35 @@
+package studentapp;
+
+public class Student {
+	 int rollNo;
+	 String studentName;
+	 String studentClass;
+	 String subject;
+	 int totalMarks;
+	
+	public void displayStudentData(int rollNo,String studentName,String studentClass,String subject,int totalMarks) {
+		
+		this.rollNo=rollNo;
+		this.studentName=studentName;
+		this.studentClass=studentClass;
+		this.subject=subject;
+		this.totalMarks=totalMarks;
+		
+	System.out.println("Student Details "+ rollNo + " "+ studentName + " "+ studentClass + " "+subject + " "+ totalMarks);	
+		
+		
+		
+	}
+
+}
+----------
+package studentapp;
+
+public class StudentMain {
+	
+	public static void main(String[] args) {
+		Student stud= new Student();
+		stud.displayStudentData(23, "Anjela", "4th standard", "Maths", 80);
+	}
+
+}
