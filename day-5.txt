@@ -1,67 +1,69 @@
-package abstractdemo;
+package com.restaurant;
 
-public abstract class CofeeSteps {
+public interface Restaurant {
 	
-	public abstract void takeCup();
-	public abstract void addCoffeePowder();
-	public abstract void addWater();
-	public abstract void serveIt();
-	public abstract void makeItHot();
-	
-	public  void addSugar() {
-		System.out.println("add sugar optional");
-	}
-	}
---------
+	public String prepareFood(String dishName);
 
-package abstractdemo;
+}
+---------------------
+package com.restaurant;
 
-public class Americano extends CofeeSteps{
+public class IndianRestaurant implements Restaurant{
 
 	@Override
-	public void takeCup() {
-		System.out.println("medium cup taken");
+	public String prepareFood(String dishName) {
 		
-	}
-
-	@Override
-	public void addCoffeePowder() {
-System.out.println("add strong coffee");		
-	}
-
-	@Override
-	public void addWater() {
-		System.out.println("add little water");
-		
-	}
-
-	@Override
-	public void serveIt() {
-		System.out.println("Served it hot.....");
-		
-	}
-
-	@Override
-	public void makeItHot() {
-		System.out.println("steamed well");
-		
+		return "preparing "+ dishName + " with indian herbs and spices";
 	}
 
 }
--------------
+----------------
+package com.restaurant;
 
-package abstractdemo;
+public class American implements Restaurant{
 
-public class CoffeeMain {
+	@Override
+	public String prepareFood(String dishName) {
+ 	return "preparing "+ dishName + " with lots of cheese and breads";
+
+	}
+
+}
+
+
+-----------------
+package com.service;
+
+import com.restaurant.Restaurant;
+
+public class RoomService {
+	
+	public Restaurant restaurant;
+
+	public RoomService(Restaurant restaurant) {
+
+		this.restaurant = restaurant;
+	}
+	
+	public String placeOrder(String dishName) {
+		return restaurant.prepareFood(dishName);
+	}
+
+}
+
+----------------
+
+package com.guest;
+
+import com.restaurant.American;
+import com.restaurant.IndianRestaurant;
+import com.service.RoomService;
+
+public class RoomGuest {
 	public static void main(String[] args) {
 		
-		Americano americano= new Americano();
-		
-		americano.takeCup();
-		americano.addWater();
-		americano.addCoffeePowder();
-		americano.makeItHot();
-		americano.serveIt();
+		RoomService roomService= new RoomService(new American());
+		System.out.println(roomService.placeOrder("Cheese Burger"));
 	}
 
 }
