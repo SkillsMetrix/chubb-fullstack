@@ -1,60 +1,29 @@
-package com.restaurant;
+package com.factory;
 
-public interface Restaurant {
-	
-	public String prepareFood(String dishName);
-
-}
----------------------
-package com.restaurant;
-
-public class IndianRestaurant implements Restaurant{
-
-	@Override
-	public String prepareFood(String dishName) {
-		
-		return "preparing "+ dishName + " with indian herbs and spices";
-	}
-
-}
-----------------
-package com.restaurant;
-
-public class American implements Restaurant{
-
-	@Override
-	public String prepareFood(String dishName) {
- 	return "preparing "+ dishName + " with lots of cheese and breads";
-
-	}
-
-}
-
-
------------------
-package com.service;
-
+import com.restaurant.American;
+import com.restaurant.IndianRestaurant;
 import com.restaurant.Restaurant;
 
-public class RoomService {
-	
-	public Restaurant restaurant;
+public class RestaurantFactory {
+	// can access this fun directly with the class name
+	public static Restaurant createRestaurant(char input) {
+		switch (input) {
+		case 'i':
+			return new IndianRestaurant();
+		case 'a':
+			return new American();
+		default:
+			return null;
 
-	public RoomService(Restaurant restaurant) {
-
-		this.restaurant = restaurant;
-	}
-	
-	public String placeOrder(String dishName) {
-		return restaurant.prepareFood(dishName);
+		}
 	}
 
 }
-
-----------------
+----------------------
 
 package com.guest;
 
+import com.factory.RestaurantFactory;
 import com.restaurant.American;
 import com.restaurant.IndianRestaurant;
 import com.service.RoomService;
@@ -62,8 +31,8 @@ import com.service.RoomService;
 public class RoomGuest {
 	public static void main(String[] args) {
 		
-		RoomService roomService= new RoomService(new American());
-		System.out.println(roomService.placeOrder("Cheese Burger"));
+		RoomService roomService= new RoomService(RestaurantFactory.createRestaurant('i'));
+		System.out.println(roomService.placeOrder("Chicken "));
 	}
 
 }
