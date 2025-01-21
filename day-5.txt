@@ -1,0 +1,67 @@
+package abstractdemo;
+
+public abstract class CofeeSteps {
+	
+	public abstract void takeCup();
+	public abstract void addCoffeePowder();
+	public abstract void addWater();
+	public abstract void serveIt();
+	public abstract void makeItHot();
+	
+	public  void addSugar() {
+		System.out.println("add sugar optional");
+	}
+	}
+--------
+
+package abstractdemo;
+
+public class Americano extends CofeeSteps{
+
+	@Override
+	public void takeCup() {
+		System.out.println("medium cup taken");
+		
+	}
+
+	@Override
+	public void addCoffeePowder() {
+System.out.println("add strong coffee");		
+	}
+
+	@Override
+	public void addWater() {
+		System.out.println("add little water");
+		
+	}
+
+	@Override
+	public void serveIt() {
+		System.out.println("Served it hot.....");
+		
+	}
+
+	@Override
+	public void makeItHot() {
+		System.out.println("steamed well");
+		
+	}
+
+}
+-------------
+
+package abstractdemo;
+
+public class CoffeeMain {
+	public static void main(String[] args) {
+		
+		Americano americano= new Americano();
+		
+		americano.takeCup();
+		americano.addWater();
+		americano.addCoffeePowder();
+		americano.makeItHot();
+		americano.serveIt();
+	}
+
+}
