@@ -35,4 +35,71 @@ public class RoomGuest {
 		System.out.println(roomService.placeOrder("Chicken "));
 	}
 
+
+
+
+------------------
+Notes
+
+Class ->
+Template (set of rules)
+
+1) take a cup
+2) take a coffee powder
+3) water
+4) add sugar
+5)make it hot
+6) serve it
+---------------
+
+cap
+lat
+amer
+
+-------------------------
+abstract class 
+
+1) take a cup
+2) take a coffee powder
+3) water
+4) add sugar (optional)
+5)make it hot
+6) serve it
+------------
+
+Abstract
+Bank (withdrawl ,depo ,checkbal) -> abs
+     (openSalaryAcc, openFD) => optional
+
+child classes...
+
+Citibank
+JPMC
+MS
+
+Main class
+
+constructor
+2 types:
+
+1) default
+2) parameterized
+------------------------------
+
+Interface is just like an abstract class ,
+1) abstract classes we cant have non abstract method
+2) you cant have constructor in interfaces
+3) you are allowed to have only constants variable in interfaces
+
+--------------------
+in java multiple inheritance not possible  ,only multilevel is allowed
+
+
+---------
+factory DP
+
+
+
+
+
 }
