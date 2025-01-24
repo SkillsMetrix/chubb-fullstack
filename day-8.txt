@@ -1,0 +1,37 @@
+package day8assesment;
+
+public class Assignment4 {
+	int real,image;
+	
+	public Assignment4(int r, int i) {
+		this.real=r;
+		this.image=i;
+	}
+	
+	public void show() {
+		System.out.println(this.real + " +i" + this.image);
+	}
+	public static Assignment4 add(Assignment4 n1,Assignment4 n2) {
+		// creating blank complex numbers to store the result
+		Assignment4 res= new Assignment4(0, 0);
+		//adding real parts of both complex num
+		res.real=n1.real+n2.real;
+		//adding imag parts
+		res.image=n1.image +n2.image;
+		return res;
+	}
+	public static void main(String[] args) {
+		Assignment4 c1= new Assignment4(4, 5);
+		Assignment4 c2= new Assignment4(10, 5);
+		//print
+		c1.show();
+		c2.show();
+		// calling add fun
+		Assignment4 res= add(c1,c2);
+		//display addition
+		res.show();
+
+		
+	}
+
+}
