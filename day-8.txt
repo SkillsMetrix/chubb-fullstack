@@ -1,26 +1,30 @@
 package day8assesment;
 
-public class Assignment6 {
-	public static void printPascal(int k) {
-		for (int line=1; line<=k;line++) {
-			for(int b=0; b<=k -line;b++) {
-				//print whitespaces for left spacing
-				System.out.println(" ");
-			}
-			//variable used to represent C(line,i)
-			int C=1;
-			for(int a=1;a<=line;a++) {
-				//print first value in a line is always 1
-				System.out.println(C + " ");
-				C =C*(line-a)/a;
-			}
-			//BY now,we are done with one row so a now line is required
-			System.out.println();
+public class Assignment7 {
+
+	// compute the value of first fibo series and storing the sum of even indexed
+	// numbers
+
+	static int solvetheProblem(int n) {
+		if (n <= 0)
+			return 0;
+		int fib[] = new int[2 * n + 1];
+		fib[0] = 0;
+		fib[1] = 1;
+		// initializing the sum
+		int s = 0;
+		// adding remain numbers
+		for (int j = 2; j <= 2 * n; j++) {
+			fib[j] = fib[j - 1] + fib[j - 2];
+			// consider only even indexes
+			if (j % 2 == 0)
+				s += fib[j];
 		}
-	}
-	public static void main(String[] args) {
-		int n=6;
-		printPascal(n);
+		return s;
 	}
 
+	public static void main(String[] args) {
+		int N = 4;
+		System.out.println("Even sum  " + N + " " + solvetheProblem(N));
+	}
 }
