@@ -1,0 +1,52 @@
+package com.app;
+
+import com.exceptions.DepositException;
+
+public class AccountDaoImpl implements AccountDAO {
+
+	private static float accountDetails[][] = new float[10][10];
+
+	@Override
+	public void deposit(int accNo, float amount) throws DepositException {
+		System.out.println("Amount Deposited " + accNo);
+		if (amount <= 0)
+			throw new DepositException("Deposit amount must be a valid value");
+
+		for (int i = 0; i < accountDetails.length; i++) {
+			if (accountDetails[i][0] == accNo) {
+				accountDetails[i][1] += amount;
+				break;
+			} else if (accountDetails[i][0] == 0) {
+				accountDetails[i][0] = amount;
+				accountDetails[i][0] = accNo;
+				break;
+			}
+		}
+
+	}
+
+	@Override
+	public void withdraw(int accNo, float amount) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void balanceEnquiry(int accNo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createAccount(int accNo, float amount, String accHolderName) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void fundTransfer(int srcAccNo, int destAccount, float amount) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
