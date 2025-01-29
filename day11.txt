@@ -1,128 +1,28 @@
-package com.app;
+package collectiondemos;
 
- import com.exceptions.InsufficientFundsException;
-import com.exceptions.InvalidBalanceException;
+import java.util.ArrayList;
 
-public interface AccountDAO {
-	public void deposit(float amount) throws InvalidBalanceException;
-	public void withdraw( float amount) throws InsufficientFundsException,InvalidBalanceException;
-	public double balanceEnquiry();
-	public void displayAccountDetails();
-	public void fundTrans(String srcAccount,double amount,String destAccount) 
-			throws InsufficientFundsException,InvalidBalanceException;;
+public class ArrayListDemo {
 
-
-
-
-
-}
----------------
-
-package com.app;
-
-import com.exceptions.InsufficientFundsException;
-import com.exceptions.InvalidBalanceException;
-
-public class AccountDaoImpl implements AccountDAO {
-	private String accNo;
-	private double balance;
-
-	private String destaccNo;
-	private double destBalance;
-
-	public AccountDaoImpl(String accNo, double balance, String destaccNo, double destBalance)
-			throws InvalidBalanceException {
-		if (balance < 0) {
-			throw new InvalidBalanceException("Balance cant be negative");
-		}
-		this.accNo = accNo;
-		this.balance = balance;
-		this.destaccNo = destaccNo;
-		this.destBalance = destBalance;
-	}
-
-	@Override
-	public void deposit(float amount) throws InvalidBalanceException {
-		if (amount <= 0) {
-			throw new InvalidBalanceException("deposit cant be negative or zero");
-
-		}
-		this.balance += amount;
-		System.out.println("Deposited $ " + amount);
-
-	}
-
-	@Override
-	public void withdraw(float amount) throws InsufficientFundsException, InvalidBalanceException {
-
-		if (amount <= 0) {
-			throw new InvalidBalanceException("withdraw cant be negative or zero");
-
-		}
-		if (this.balance < amount) {
-			throw new InsufficientFundsException("Funds not available");
-
-		}
-		this.balance -= amount;
-		System.out.println("Withdraw $ " + amount);
-	}
-
-	@Override
-	public double balanceEnquiry() {
-		return this.balance;
-
-	}
-
-	@Override
-	public void displayAccountDetails() {
-		System.out.println("SrcAccount Number " + this.accNo);
-		System.out.println("SrcCurrent Balance " + this.balance);
-		System.out.println("DestAccount Number " + this.destaccNo);
-		System.out.println("DestCurrent Balance " + this.destBalance);
-
-	}
-
-	@Override
-	public void fundTrans(String srcAccount, double amount, String destAccount)
-			throws InsufficientFundsException, InvalidBalanceException {
-
-		if (amount <= 0) {
-			throw new InvalidBalanceException("withdraw cant be negative or zero");
-
-		}
-		if (this.balance < amount) {
-			throw new InsufficientFundsException("Funds not available");
-
-		}
-		this.balance -= amount;
-		this.destBalance += amount;
-		System.out.println("TRansferred $ " + amount);
-
-	}
-
-}
--------------------
-package com.app;
-
-import com.exceptions.InsufficientFundsException;
-import com.exceptions.InvalidBalanceException;
-
-public class Client {
-
+		
 	public static void main(String[] args) {
 		
-		try {
-			AccountDAO accountDAO= new AccountDaoImpl("src101", 1000,"dest101",500);
+		 ArrayList<String> list = new ArrayList<>();
+		 list.add("Java");
+		 list.add("Python");
+		 list.add("C++");
+		 list.add("C#");
+		 list.add("Ruby");
+		 list.add(2, "JavaScript");
+		 list.remove(4);
+		// [Java, Python, C++, C#, Ruby]
+		 System.out.println("getting index position " +list.indexOf("C++"));
+		 System.out.println("getting data from this position " +list.get(2));
+		 System.out.println("after iterate ");
+		 for(String localData:list) {
 			
-			accountDAO.displayAccountDetails();
-			accountDAO.fundTrans("src101", 500, "dest101");
-			System.out.println("Post Fund Tranf");
-			accountDAO.displayAccountDetails();
-			 
-		} catch (InvalidBalanceException | InsufficientFundsException  e) {
-			System.out.println(e.getMessage());
-		}
-		
+			 System.out.println(localData);
+		 }
 
 	}
 
