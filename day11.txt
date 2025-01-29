@@ -1,0 +1,60 @@
+package com.app;
+
+import com.exceptions.InsufficientFundsException;
+import com.exceptions.InvalidBalanceException;
+
+public class AccountDaoImpl implements AccountDAO {
+	private String accNo;
+	private double balance;
+	
+	
+
+	public AccountDaoImpl(String accNo, double balance) throws InvalidBalanceException{
+		if(balance < 0) {
+			throw new InvalidBalanceException("Balance cant be negative");
+		}
+		this.accNo = accNo;
+		this.balance = balance;
+	}
+
+	@Override
+	public void deposit(float amount) throws InvalidBalanceException {
+		if( amount <=0) {
+			throw new InvalidBalanceException("deposit cant be negative or zero");
+
+		}
+		this.balance +=amount;
+		System.out.println("Deposited $ "+ amount);
+		
+	}
+
+	@Override
+	public void withdraw(float amount) throws InsufficientFundsException, InvalidBalanceException {
+		
+		if( amount <=0) {
+			throw new InvalidBalanceException("withdraw cant be negative or zero");
+
+		}
+		if(this.balance < amount) {
+			throw new InsufficientFundsException("Funds not available");
+
+		}
+		this.balance -=amount;
+		System.out.println("Withdraw $ "+amount);
+	}
+
+	@Override
+	public void balanceEnquiry() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayAccountDetails() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+}
