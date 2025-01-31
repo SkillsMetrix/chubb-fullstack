@@ -22,3 +22,31 @@ public class ProjectList {
 	}
 
 }
+---------------
+
+package collectiondemos;
+
+public class Projects implements Comparable<Projects> {
+	private int projectId;
+	private String projectName;
+	private int projectDuration;
+	public Projects(int projectId, String projectName, int projectDuration) {
+		super();
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.projectDuration = projectDuration;
+	}
+	@Override
+	public String toString() {
+		return "Projects [projectId=" + projectId + ", projectName=" + projectName + ", projectDuration="
+				+ projectDuration + "]";
+	}
+	@Override
+	public int compareTo(Projects o) {
+		// TODO Auto-generated method stub
+		return this.projectId - o.projectId;
+	}
+	
+	
+
+}
