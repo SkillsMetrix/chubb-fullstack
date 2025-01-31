@@ -1,0 +1,24 @@
+package collectiondemos;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ProjectList {
+
+	public static void main(String[] args) {
+		ArrayList<Projects> projectList = new ArrayList<>();
+		
+		projectList.add(new Projects(103, "Project1", 10));
+		projectList.add(new Projects(104, "Project2", 20));
+		projectList.add(new Projects(101, "Project3", 30));
+		projectList.add(new Projects(102, "Project4", 40));
+		projectList.add(new Projects(105, "Project5", 50));
+	       Collections.sort(projectList);
+		for(Projects pr:projectList) {
+			System.out.println(pr);
+		}
+		
+
+	}
+
+}
