@@ -1,0 +1,32 @@
+package com.dao;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.exception.UserNotFoundException;
+import com.model.Users;
+
+public class UserDaoImpl implements UserDAO{
+	Map<String, Users> userMap= new HashMap();
+
+	@Override
+	public void addUser() {
+		userMap.put("user1", new Users("admin","admin",30,"NYC"));	
+		userMap.put("user2", new Users("user","user",20,"Mumbai"));
+		userMap.put("user3", new Users("manager","manager",25,"Pune"));
+		userMap.put("user4", new Users("employee","employee",22,"Bangalore"));
+		
+		for(Map.Entry<String, Users> entry : userMap.entrySet()) {
+			System.out.println(entry.getKey() + " " + entry.getValue());
+		}
+	}
+
+	@Override
+	public Users findUser(Map<String, Users> userMap, String userName) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
+
+-------------------
