@@ -1,21 +1,5 @@
 package com.dao;
 
-import java.util.Map;
-
-import com.exception.UserNotFoundException;
-import com.model.Users;
-
-public interface UserDAO {
-	
-	public void addUser();
-	public Users findUser(String userName)throws UserNotFoundException;
-
-}
-
--------------
-
-package com.dao;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,19 +7,16 @@ import com.exception.UserNotFoundException;
 import com.model.Users;
 
 public class UserDaoImpl implements UserDAO{
-	Map<String, Users> userMap= new HashMap();
-
-	@Override
-	public void addUser() {
-		userMap.put("user1", new Users("admin","admin",30,"NYC"));	
-		userMap.put("user2", new Users("user","user",20,"Mumbai"));
-		userMap.put("user3", new Users("manager","manager",25,"Pune"));
-		userMap.put("user4", new Users("employee","employee",22,"Bangalore"));
-		
-		for(Map.Entry<String, Users> entry : userMap.entrySet()) {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		}
+	static Map<String, Users> userMap= new HashMap();
+	static {
+		userMap.put("user1", new Users("admin", "admin", 30, "NYC"));
+		userMap.put("user2", new Users("user", "user", 20, "Mumbai"));
+		userMap.put("user3", new Users("manager", "manager", 25, "Pune"));
+		userMap.put("user4", new Users("employee", "employee", 22, "Bangalore"));
+	
 	}
+
+	 
 
 	@Override
 	public Users findUser(String userName) throws UserNotFoundException {
@@ -48,10 +29,31 @@ public class UserDaoImpl implements UserDAO{
 
 	}
 
-}
 
+
+	@Override
+	public void loadUsers() {
+		for (Map.Entry<String, Users> entry : userMap.entrySet()) {
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+		
+	}
+
+
+
+	@Override
+	public void deleteUser(String userName) throws UserNotFoundException {
+		 if(userMap.containsKey(userName)) {
+            userMap.remove(userName);
+        } else {
+            throw new UserNotFoundException("User not found");
+		
+	}
+
+	}}
 
 ------------------
+
 
 package com.client;
 
@@ -62,15 +64,17 @@ import com.exception.UserNotFoundException;
 public class Client {
 	public static void main(String[] args) {
 		UserDAO userDAO = new UserDaoImpl();
-	userDAO.addUser();
-		
+		System.out.println("Users before delete");
+		userDAO.loadUsers();
+
 		try {
-			System.out.println(userDAO.findUser("user222"));
+			// System.out.println(userDAO.findUser("user39"));
+
+			userDAO.deleteUser("user2");
 		} catch (UserNotFoundException e) {
 			System.out.println(e.getMessage());
-        }
-		 
 		}
+		System.out.println("Users after delete");
+		userDAO.loadUsers();
 	}
-
-
+}
