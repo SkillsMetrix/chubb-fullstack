@@ -1,0 +1,18 @@
+package streamdemo;
+
+import java.util.ArrayList;
+
+public class Demo1 {
+	public static void main(String[] args) {
+		ArrayList<String> al = new ArrayList<String>();
+		al.add("Amit");
+		al.add("Vijay");
+		al.add("Kumar");
+		al.add("Santosh");
+		al.add("Ajay");
+		al.add("Vijay");
+
+		al.stream().filter((s) -> s.startsWith("A")).forEach((s) -> System.out.println(s));
+	}
+
+}
