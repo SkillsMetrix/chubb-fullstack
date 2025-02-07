@@ -8,35 +8,95 @@ import com.dao.BookDaoImpl;
 public class Client {
 
 	public static void main(String[] args) {
-		 Scanner sc = new Scanner(System.in);
-		 BookDao bookDao = new BookDaoImpl();
-		 
-		 while(true) {
-			 System.out.println("Library Management System");
-			 System.out.println("1. Add Book");
-			 System.out.println("2. Display Books");
-			 int options=sc.nextInt();
-			 sc.nextLine();
-			 switch(options) {
-			 case 1:
-					System.out.println("Enter title");
-					String title = sc.nextLine();
-					System.out.println("Enter author");
-					String author = sc.nextLine();
-					System.out.println("Enter isbn");
-					String isbn = sc.nextLine();
-					System.out.println("Enter availability");
-					boolean isAvailable = sc.nextBoolean();
-					bookDao.addBook(title, author, isbn, isAvailable);
-					break;
-				case 2:
-					bookDao.displayBooks();
-					break;
-					default:
-						System.out.println("Invalid option, Try again");
-			 }
-		 }
+		Scanner sc = new Scanner(System.in);
+		BookDao bookDao = new BookDaoImpl();
 
+		while (true) {
+			System.out.println("Library Management System");
+			System.out.println("1. Add Book");
+			System.out.println("2. Display Books");
+			System.out.println("3. Delete Book");
+			int options = sc.nextInt();
+			sc.nextLine();
+			switch (options) {
+			case 1:
+				System.out.println("Enter title");
+				String title = sc.nextLine();
+				System.out.println("Enter author");
+				String author = sc.nextLine();
+				System.out.println("Enter isbn");
+				String isbn = sc.nextLine();
+				System.out.println("Enter availability");
+				boolean isAvailable = sc.nextBoolean();
+				bookDao.addBook(title, author, isbn, isAvailable);
+				break;
+			case 2:
+				bookDao.displayBooks();
+				break;
+			case 3:
+				System.out.println("Enter isbn to delete");
+				String isbnToDelete = sc.nextLine();
+				try {
+					bookDao.deleteBook(isbnToDelete);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			default:
+				System.out.println("Invalid option, Try again");
+			}
+		}
+
+	}
+
+}
+
+------------------------
+package com.dao;
+
+import com.exceptions.BookNotFoundException;
+
+public interface BookDao {
+	 public void addBook(String title, String author, String isbn, boolean isAvailable);
+	 public void displayBooks();
+	 public void deleteBook(String isbn) throws BookNotFoundException;
+
+}
+
+----------------
+
+package com.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.exceptions.BookNotFoundException;
+import com.model.Books;
+
+public class BookDaoImpl implements BookDao {
+
+	private List<Books> books = new ArrayList<>();
+
+	@Override
+	public void addBook(String title, String author, String isbn, boolean isAvailable) {
+		books.add(new Books(title, author, isbn, isAvailable));
+
+	}
+
+	@Override
+	public void displayBooks() {
+		if (books.isEmpty()) {
+			System.out.println("No books to display");
+		} else {
+			books.forEach(System.out::println);
+		}
+
+	}
+
+	@Override
+	public void deleteBook(String isbn) throws BookNotFoundException {
+
+		books.removeIf(book -> book.getIsbn().equals(isbn));
 	}
 
 }
