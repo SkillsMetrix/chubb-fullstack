@@ -1,0 +1,42 @@
+package com.client;
+
+import java.util.Scanner;
+
+import com.dao.BookDao;
+import com.dao.BookDaoImpl;
+
+public class Client {
+
+	public static void main(String[] args) {
+		 Scanner sc = new Scanner(System.in);
+		 BookDao bookDao = new BookDaoImpl();
+		 
+		 while(true) {
+			 System.out.println("Library Management System");
+			 System.out.println("1. Add Book");
+			 System.out.println("2. Display Books");
+			 int options=sc.nextInt();
+			 sc.nextLine();
+			 switch(options) {
+			 case 1:
+					System.out.println("Enter title");
+					String title = sc.nextLine();
+					System.out.println("Enter author");
+					String author = sc.nextLine();
+					System.out.println("Enter isbn");
+					String isbn = sc.nextLine();
+					System.out.println("Enter availability");
+					boolean isAvailable = sc.nextBoolean();
+					bookDao.addBook(title, author, isbn, isAvailable);
+					break;
+				case 2:
+					bookDao.displayBooks();
+					break;
+					default:
+						System.out.println("Invalid option, Try again");
+			 }
+		 }
+
+	}
+
+}
