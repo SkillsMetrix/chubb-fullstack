@@ -1,0 +1,59 @@
+Here are exercises on SQL INSERT, CREATE, and ALTER statements, along with solutions to help students practice:
+
+Exercise 1: CREATE TABLE
+Task: Create a table named Students with the following columns:
+
+StudentID (integer, primary key)
+FirstName (varchar(50))
+LastName (varchar(50))
+Age (integer)
+Grade (char(1))
+
+
+Exercise 2: INSERT INTO
+Task: Insert the following records into the Students table:
+
+StudentID: 1, FirstName: John, LastName: Doe, Age: 20, Grade: A
+StudentID: 2, FirstName: Jane, LastName: Smith, Age: 22, Grade: B
+StudentID: 3, FirstName: Alice, LastName: Brown, Age: 21, Grade: C
+Solution:
+
+ 
+Exercise 3: ALTER TABLE - Add Column
+Task: Add a new column called Email (varchar(100)) to the Students table.
+
+ 
+Exercise 4: ALTER TABLE - Modify Column
+Task: Modify the Grade column in the Students table to allow a length of 2 characters (i.e., Grade should be char(2)).
+
+ 
+Exercise 5: INSERT INTO with SELECT
+Task: Insert data from the Students table into a new table Graduates, which has the same structure as Students.
+
+ 
+Exercise 6: ALTER TABLE - Drop Column
+Task: Remove the Email column from the Students table.
+
+ 
+Exercise 7: INSERT INTO with DEFAULT values
+Task: Add a new student to the Students table without providing a value for the Grade. Set a default value of 'F' for Grade.
+
+ 
+
+Exercise 8: CREATE TABLE with Constraints
+Task: Create a table Courses with the following columns:
+
+CourseID (integer, primary key)
+CourseName (varchar(100), not null)
+Credits (integer, not null, check that it is greater than 0)
+InstructorName (varchar(100))
+
+
+Exercise 9: ALTER TABLE - Rename Column
+Task: Rename the LastName column in the Students table to Surname.
+
+ 
+Exercise 10: INSERT INTO with Multiple Rows
+Task: Insert multiple rows into the Students table in one statement.
+
+ 
