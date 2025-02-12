@@ -1,23 +1,47 @@
-CREATE TABLE STUDENT (
-    STUDENT_ID NUMBER PRIMARY KEY,
-    FIRST_NAME VARCHAR2(50),
-    LAST_NAME VARCHAR2(50),
-    AGE NUMBER,
-    GENDER CHAR(1),
-    MAJOR VARCHAR2(50),
-    ENROLLMENT_DATE DATE
+CREATE TABLE ORDER (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    order_status VARCHAR2(20),
+    total_amount NUMBER(10, 2),
+    customer_name VARCHAR2(100)
 );
 
 
+INSERT INTO ORDER (order_id, customer_id, order_date, order_status, total_amount, customer_name) 
+VALUES (1, 101, TO_DATE('2025-01-05', 'YYYY-MM-DD'), 'Shipped', 150.00, 'John Doe');
 
-INSERT INTO STUDENT (STUDENT_ID, FIRST_NAME, LAST_NAME, AGE, GENDER, MAJOR, ENROLLMENT_DATE)
-VALUES (1, 'John', 'Doe', 20, 'M', 'Computer Science', TO_DATE('2022-08-15', 'YYYY-MM-DD'));
+INSERT INTO ORDER (order_id, customer_id, order_date, order_status, total_amount, customer_name) 
+VALUES (2, 102, TO_DATE('2025-01-10', 'YYYY-MM-DD'), 'Processing', 230.50, 'Jane Smith');
 
-INSERT INTO STUDENT (STUDENT_ID, FIRST_NAME, LAST_NAME, AGE, GENDER, MAJOR, ENROLLMENT_DATE)
-VALUES (2, 'Jane', 'Smith', 22, 'F', 'Mathematics', TO_DATE('2021-09-10', 'YYYY-MM-DD'));
+INSERT INTO ORDER (order_id, customer_id, order_date, order_status, total_amount, customer_name) 
+VALUES (3, 103, TO_DATE('2025-02-02', 'YYYY-MM-DD'), 'Shipped', 300.75, 'Mike Johnson');
 
-INSERT INTO STUDENT (STUDENT_ID, FIRST_NAME, LAST_NAME, AGE, GENDER, MAJOR, ENROLLMENT_DATE)
-VALUES (3, 'Mary', 'Johnson', 21, 'F', 'Biology', TO_DATE('2022-01-25', 'YYYY-MM-DD'));
+INSERT INTO ORDER (order_id, customer_id, order_date, order_status, total_amount, customer_name) 
+VALUES (4, 101, TO_DATE('2025-02-07', 'YYYY-MM-DD'), 'Cancelled', 100.00, 'John Doe');
 
-INSERT INTO STUDENT (STUDENT_ID, FIRST_NAME, LAST_NAME, AGE, GENDER, MAJOR, ENROLLMENT_DATE)
-VALUES (4, 'James', 'Brown', 23, 'M', 'Physics', TO_DATE('2021-06-12', 'YYYY-MM-DD'));
+INSERT INTO ORDER (order_id, customer_id, order_date, order_status, total_amount, customer_name) 
+VALUES (5, 104, TO_DATE('2025-02-10', 'YYYY-MM-DD'), 'Processing', 450.60, 'Sara Lee');
+
+INSERT INTO ORDER (order_id, customer_id, order_date, order_status, total_amount, customer_name) 
+VALUES (6, 102, TO_DATE('2025-01-15', 'YYYY-MM-DD'), 'Shipped', 120.40, 'Jane Smith');
+
+
+
+3. Basic SQL Queries
+3.1 Select all records from the ORDER table
+3.2 Select specific columns (e.g., order_id, order_date, customer_name)
+3.3 Select orders where the status is 'Shipped'
+
+3.4 Select orders for a specific customer (customer_id = 101)
+
+3.5 Select records where the order amount is greater than 200
+3.6 Select orders made after a specific date (e.g., 2025-01-10)
+4.1 Order by date, showing the most recent first
+4.2 Select distinct order statuses
+4.3 Count the total number of orders for each customer
+4.4 Sum of total amounts for each customer
+
+4.5 Average order amount for each customer
+Use LIKE to find customers whose names start with 'J'
+Select orders made between two specific dates
