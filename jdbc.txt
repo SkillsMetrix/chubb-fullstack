@@ -1,0 +1,23 @@
+package com.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class InsertDemo {
+	public static void main(String[] args) throws Exception {
+		String insertQuery = "insert into students(stuname,stuemail) values('Ravi', 'ravi@mail.com')";
+		//load the driver
+		//Class.forName("org.h2.Driver");
+		//establish the connection
+         Connection connection = DriverManager.getConnection("jdbc:h2:~/test","sa","");
+        System.out.println("Connection established successfully");
+        //create the statement
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(insertQuery);
+        System.out.println("Data inserted");
+        
+        
+	}
+
+}
