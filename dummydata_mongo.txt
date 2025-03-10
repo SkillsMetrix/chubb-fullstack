@@ -1,0 +1,7 @@
+[
+  { "_id": 1, "name": "Alice", "age": 28, "department": "HR", "salary": 50000, "skills": ["communication", "management"] },
+  { "_id": 2, "name": "Bob", "age": 35, "department": "IT", "salary": 70000, "skills": ["Java", "MongoDB"] },
+  { "_id": 3, "name": "Charlie", "age": 30, "department": "Finance", "salary": 65000, "skills": ["Excel", "Accounting"] },
+  { "_id": 4, "name": "David", "age": 40, "department": "IT", "salary": 80000, "skills": ["Python", "Django"] },
+  { "_id": 5, "name": "Emma", "age": 26, "department": "HR", "salary": 48000, "skills": ["Recruitment", "Onboarding"] }
+]
