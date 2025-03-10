@@ -1,7 +1,66 @@
 [
-  { "_id": 1, "name": "Alice", "age": 28, "department": "HR", "salary": 50000, "skills": ["communication", "management"] },
-  { "_id": 2, "name": "Bob", "age": 35, "department": "IT", "salary": 70000, "skills": ["Java", "MongoDB"] },
-  { "_id": 3, "name": "Charlie", "age": 30, "department": "Finance", "salary": 65000, "skills": ["Excel", "Accounting"] },
-  { "_id": 4, "name": "David", "age": 40, "department": "IT", "salary": 80000, "skills": ["Python", "Django"] },
-  { "_id": 5, "name": "Emma", "age": 26, "department": "HR", "salary": 48000, "skills": ["Recruitment", "Onboarding"] }
+  {
+    "_id": 1,
+    "name": "Alice",
+    "age": 22,
+    "major": "Computer Science",
+    "gpa": 3.8,
+    "status": "active",
+    "email": "alice@example.edu"
+  },
+  {
+    "_id": 2,
+    "name": "Bob",
+    "age": 25,
+    "major": "Mathematics",
+    "gpa": 3.5,
+    "status": "active",
+    "email": "bob@example.com"
+  },
+  {
+    "_id": 3,
+    "name": "Charlie",
+    "age": 19,
+    "major": "Physics",
+    "gpa": 3.2,
+    "status": "inactive",
+    "email": "charlie@example.edu"
+  },
+  {
+    "_id": 4,
+    "name": "Diana",
+    "age": 23,
+    "major": "Computer Science",
+    "gpa": 3.9,
+    "status": "active",
+    "email": "diana@example.edu"
+  },
+  {
+    "_id": 5,
+    "name": "Eve",
+    "age": 28,
+    "major": "Mathematics",
+    "gpa": 3.7,
+    "status": "inactive",
+    "email": "eve@example.com"
+  }
 ]
+
+
+
+-----
+
+ 
+
+Retrieve all documents from the students collection.
+Retrieve all documents where the age is greater than 22.
+Retrieve only the name and email fields for all students.
+Retrieve all documents where the major is "Computer Science".
+Retrieve all documents where the status is "active" and the gpa is greater than 3.5.
+ 
+
+Retrieve all documents where the email ends with ".edu".
+Retrieve all documents where the age is between 20 and 25.
+Count the number of students with a gpa greater than 3.5.
+Update the status to "inactive" for all students with an age greater than 25.
+Delete all documents where the status is "inactive".
