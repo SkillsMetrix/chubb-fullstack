@@ -1,6 +1,24 @@
-//
-let employees = [];
+
+   //
+//let employees = [];
 let editIndex = -1;
+
+class Employee {
+  constructor(empId, empName, empCity) {
+    this.empId = empId;
+    this.empName = empName;
+    this.empCity = empCity;
+  }
+}
+
+let employees =
+  JSON.parse(localStorage.getItem("empdata"))?.map(
+    (emp) => new Employee(emp.empId, emp.empName, emp.empCity)
+  ) || [];
+
+function saveToLocalStorage() {
+  localStorage.setItem("empdata", JSON.stringify(employees));
+}
 
 function showData() {
   const list = document.getElementById("emplist");
@@ -12,7 +30,7 @@ function showData() {
         <span> ${emp.empId} - ${emp.empName} - ${emp.empCity} </span>
         <div> 
         <button class="bg-yellow-500 px-2 py-1 rounded" onclick="editEmployee(${index})">Edit</button>
-          <button class="bg-red-500 px-2 py-1 rounded" onclick="deleteEmployee(${index})">Delete</button>
+          <button class="bg-red-500 px-2 py-1 rounded" onclick="confirmDelete(${index})">Delete</button>
         </div>
 
         </li>`;
@@ -23,13 +41,15 @@ function addorUpdateEmployee() {
   const empName = document.getElementById("empname").value;
   const empCity = document.getElementById("empcity").value;
   if (empId && empName && empCity) {
+    const employee = new Employee(empId, empName, empCity);
     if (editIndex === -1) {
-      employees.push({ empId, empName, empCity });
+      employees.push(employee);
     } else {
       employees[editIndex] = { empId, empName, empCity };
       editIndex = -1;
       document.getElementById("submit-btn").textContent = "Add Employee";
     }
+    saveToLocalStorage();
     document.getElementById("empid").value = "";
     document.getElementById("empname").value = "";
     document.getElementById("empcity").value = "";
@@ -38,7 +58,13 @@ function addorUpdateEmployee() {
 }
 function deleteEmployee(index) {
   employees.splice(index, 1);
+  saveToLocalStorage();
   showData();
+}
+function confirmDelete(index) {
+  if (confirm("Are you sure you want to delete this employee?")) {
+    deleteEmployee(index);
+  }
 }
 
 function editEmployee(index) {
