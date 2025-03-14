@@ -37,16 +37,58 @@
 --------
 
 //
+//
 let employees = [];
 let editIndex = -1;
 
-function addEmployee() {
+function showData() {
+  const list = document.getElementById("emplist");
+  list.innerHTML = "";
+  employees.forEach((emp, index) => {
+    list.innerHTML += `
+        
+        <li class="p-2 bg-gray-200 flex justify-between items-center rounded">
+        <span> ${emp.empId} - ${emp.empName} - ${emp.empCity} </span>
+        <div> 
+        <button class="bg-yellow-500 px-2 py-1 rounded" onclick="editEmployee(${index})">Edit</button>
+          <button class="bg-red-500 px-2 py-1 rounded" onclick="deleteEmployee(${index})">Delete</button>
+        </div>
+
+        </li>
+        
+        `;
+  });
+}
+function addorUpdateEmployee() {
   const empId = document.getElementById("empid").value;
   const empName = document.getElementById("empname").value;
   const empCity = document.getElementById("empcity").value;
   if (empId && empName && empCity) {
-    console.log(`${empId} ${empName} ${empCity}`);
-  } else {
-    console.log("demo");
+    if (editIndex === -1) {
+      employees.push({ empId, empName, empCity });
+    } else {
+      employees[editIndex] = { empId, empName, empCity };
+      editIndex = -1;
+      document.getElementById("submit-btn").textContent = "Add Employee";
+    }
+    document.getElementById("empid").value = "";
+    document.getElementById("empname").value = "";
+    document.getElementById("empcity").value = "";
+    showData();
+  }
+
+  function deleteEmployee(index) {
+    employees.splice(index, 1);
+    showData();
+  }
+  
+
+  function editEmployee(index) {
+    const emp = employees[index];
+    document.getElementById("empid").value = emp.empId;
+    document.getElementById("empname").value = emp.empName;
+    document.getElementById("empcity").value = emp.empCity;
+    document.getElementById("submit-btn").textContent = "Update Employee";
+    editIndex = index;
   }
 }
