@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+
+</head>
+
+<body class="bg-gray-100 p-10">
+    <div class="max-w-lg mx-auto  bg-white p-6 rounded-lg shadow-md">
+        <center>
+            <h4 class="font-bold mb-4">Employee CRUD Application</h4>
+        </center>
+        <div class="mb-4">
+            <form>
+                <input type="text" id="empid" class="w-full p-2 rounded mb-2" placeholder="Enter Employee ID">
+                <input type="text" id="empname" class="w-full p-2 rounded mb-2" placeholder="Enter Employee Name">
+                <input type="text" id="empcity" class="w-full p-2 rounded mb-2" placeholder="Enter Employee city">
+                <button id="submit-btn" type="button" onclick="addEmployee()"
+                    class="mt-2 w-full bg-blue-600 p-2 rounded">Add Employee</button>
+            </form>
+        </div>
+        <ul id="emplist" class="space-y-2"></ul>
+    </div>
+
+
+
+
+
+    <script src="crudapp.js"></script>
+</body>
+
+</html>
+--------
+
+//
+let employees = [];
+let editIndex = -1;
+
+function addEmployee() {
+  const empId = document.getElementById("empid").value;
+  const empName = document.getElementById("empname").value;
+  const empCity = document.getElementById("empcity").value;
+  if (empId && empName && empCity) {
+    console.log(`${empId} ${empName} ${empCity}`);
+  } else {
+    console.log("demo");
+  }
+}
