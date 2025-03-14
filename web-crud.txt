@@ -1,5 +1,4 @@
-
-   //
+//
 //let employees = [];
 let editIndex = -1;
 
@@ -25,15 +24,16 @@ function showData() {
   list.innerHTML = "";
   employees.forEach((emp, index) => {
     list.innerHTML += `
-        
-        <li class="p-2 bg-gray-200 flex justify-between items-center rounded">
-        <span> ${emp.empId} - ${emp.empName} - ${emp.empCity} </span>
-        <div> 
-        <button class="bg-yellow-500 px-2 py-1 rounded" onclick="editEmployee(${index})">Edit</button>
-          <button class="bg-red-500 px-2 py-1 rounded" onclick="confirmDelete(${index})">Delete</button>
-        </div>
 
-        </li>`;
+        <tr class="bg-gray-100 border-b">
+        <td class="border border-gray-300 p-2 text-center">${emp.empId} </td>
+        <td class="border border-gray-300 p-2 text-center">${emp.empName} </td>
+         <td class="border border-gray-300 p-2 text-center">${emp.empCity} </td>
+        <td class="border border-gray-300 p-2 text-center">
+         <button class="bg-yellow-500 px-2 py-1 rounded" onclick="editEmployee(${index})">Edit</button>
+          <button class="bg-red-500 px-2 py-1 rounded" onclick="confirmDelete(${index})">Delete</button>
+        </td>
+        </tr>`;
   });
 }
 function addorUpdateEmployee() {
@@ -75,9 +75,9 @@ function editEmployee(index) {
   document.getElementById("submit-btn").textContent = "Update Employee";
   editIndex = index;
 }
+document.addEventListener("DOMContentLoaded", showData);
 
--------------------
-
+----------------------
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,14 +104,25 @@ function editEmployee(index) {
                     class="mt-2 w-full bg-blue-600 p-2 rounded">Add Employee</button>
             </form>
         </div>
-        <ul id="emplist" class="space-y-2"></ul>
+
+        <table class="w-full border-collapse border border-pink-200 mt-4">
+            <thead>
+                <tr class="bg-pink-400">
+                    <th class="border border-gray-300 p-2">ID</th>
+                    <th class="border border-gray-300 p-2">Name</th>
+                    <th class="border border-gray-300 p-2">City</th>
+                    <th class="border border-gray-300 p-2">Action</th>
+                </tr>
+            </thead>
+            <tbody id="emplist"></tbody>
+        </table>
     </div>
 
 
 
 
 
-    <script src="crudapp.js"></script>
+    <script src="crudapp-table.js"></script>
 </body>
 
 </html>
