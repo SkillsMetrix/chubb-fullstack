@@ -1,0 +1,55 @@
+<div class="bg-gray-100 p-10">
+    <div class="max-w-lg mx-auto  bg-white p-6 rounded-lg shadow-md">
+        
+            <h4 style="text-align: center;" class="font-bold mb-4">Employee CRUD Application</h4>
+        
+        <div class="mb-4">
+            <form (ngSubmit)="addUser(ud)" #ud=ngForm>
+                <input type="text" name="empid" ngModel class="w-full p-2 rounded mb-2" placeholder="Enter Employee ID" >
+                <input type="text" name="empname" ngModel class="w-full p-2 rounded mb-2" placeholder="Enter Employee Name">
+                <input type="text" name="empcity" ngModel class="w-full p-2 rounded mb-2" placeholder="Enter Employee city">
+                <button class="mt-2 w-full bg-blue-600 p-2 rounded">Add Employee</button>
+                   
+            </form>
+        </div>
+
+        <table class="w-full border-collapse border border-pink-200 mt-4">
+            <thead>
+                <tr class="bg-pink-400">
+                    <th class="border border-gray-300 p-2">ID</th>
+                    <th class="border border-gray-300 p-2">Name</th>
+                    <th class="border border-gray-300 p-2">City</th>
+                    <th class="border border-gray-300 p-2">Action</th>
+                </tr>
+            </thead>
+            <tbody id="emplist"></tbody>
+        </table>
+    </div>
+
+
+
+
+
+ 
+</div>
+
+
+
+--------
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-footer',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.css'
+})
+export class FooterComponent {
+
+  addUser(nf:NgForm){
+      console.log(nf.value);
+      
+  }
+}
