@@ -1,3 +1,85 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AppserviceService {
+
+  constructor(private http:HttpClient){
+     
+  }
+
+  addUser(data: any) {
+    console.log(data);
+    this.http.post("http://localhost:8090/emp/addemp",data)
+    .subscribe((data)=>{
+      console.log(data);
+      
+    })
+
+  }
+
+  
+}
+
+----------------
+
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+ 
+ 
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient(),provideZoneChangeDetection({ eventCoalescing: true })]
+};
+
+
+---------------
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AppserviceService } from '../../appservice.service';
+
+@Component({
+  selector: 'app-reactiveapp',
+  standalone: true,
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  templateUrl: './reactiveapp.component.html',
+  styleUrl: './reactiveapp.component.css'
+})
+export class ReactiveappComponent {
+  myForm: FormGroup
+  empName: FormControl
+  empEmail: FormControl
+  empCity: FormControl
+
+  createFormControls() {
+    this.empName = new FormControl('',Validators.required)
+    this.empEmail = new FormControl('',[Validators.required,Validators.email])
+    this.empCity = new FormControl('',[Validators.required,Validators.minLength(6)])
+  }
+  createForm() {
+    this.myForm = new FormGroup({
+      empName: this.empName,
+      empEmail: this.empEmail,
+      empCity: this.empCity
+    })
+  }
+  constructor(private service:AppserviceService){
+    this.createFormControls()
+    this.createForm()
+  }
+  addUser() {
+     
+    this.service.addUser(this.myForm.value)
+    
+
+  }
+}
+
+---------------
+
 <div class="bg-gray-100 p-10">
     <div class="max-w-lg mx-auto  bg-white p-6 rounded-lg shadow-md">
 
@@ -5,35 +87,35 @@
 
         <div class="mb-4">
             <form (ngSubmit)="addUser()" [formGroup]="myForm">
-                <input type="text" name="empname" class="w-full p-2 rounded mb-2" formControlName="empname"
+                <input type="text" name="empname" class="w-full p-2 rounded mb-2" formControlName="empName"
                     placeholder="Enter Employee Name">
 
-                <div *ngIf="empname.invalid &&( empname.dirty || empname.touched)">
-                    <div *ngIf="empname.hasError('required')">
+                <div *ngIf="empName.invalid &&( empName.dirty || empName.touched)">
+                    <div *ngIf="empName.hasError('required')">
                         <p>Name cant be empty</p>
                     </div>
 
                 </div>
                 <input type="email" class="w-full p-2 rounded mb-2" placeholder="Enter Email"
-                    formControlName="empemail">
+                    formControlName="empEmail">
 
-                <div *ngIf="empemail.invalid &&( empemail.dirty || empemail.touched)">
-                    <div *ngIf="empemail.hasError('required')">
+                <div *ngIf="empEmail.invalid &&( empEmail.dirty || empEmail.touched)">
+                    <div *ngIf="empEmail.hasError('required')">
                         <p>Email cant be empty</p>
                     </div>
-                    <div *ngIf="empemail.hasError('email')">
+                    <div *ngIf="empEmail.hasError('email')">
                         <p>Email must be formatted</p>
                     </div>
                 </div>
                 <input type="text" class="w-full p-2 rounded mb-2" placeholder="Enter Employee city"
-                    formControlName="empcity">
+                    formControlName="empCity">
 
 
-                <div *ngIf="empcity.invalid &&( empcity.dirty || empcity.touched)">
-                    <div *ngIf="empcity.hasError('required')">
+                <div *ngIf="empCity.invalid &&( empCity.dirty || empCity.touched)">
+                    <div *ngIf="empCity.hasError('required')">
                         <p>city cant be empty</p>
                     </div>
-                    <div *ngIf="empcity.hasError('minlength')">
+                    <div *ngIf="empCity.hasError('minlength')">
                         <p>cit must be 6 char long</p>
                     </div>
                 </div>
@@ -61,45 +143,3 @@
 
 
 </div>
-------------
-
-
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
-@Component({
-  selector: 'app-reactiveapp',
-  standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
-  templateUrl: './reactiveapp.component.html',
-  styleUrl: './reactiveapp.component.css'
-})
-export class ReactiveappComponent {
-  myForm: FormGroup
-  empname: FormControl
-  empemail: FormControl
-  empcity: FormControl
-
-  createFormControls() {
-    this.empname = new FormControl('',Validators.required)
-    this.empemail = new FormControl('',[Validators.required,Validators.email])
-    this.empcity = new FormControl('',[Validators.required,Validators.minLength(6)])
-  }
-  createForm() {
-    this.myForm = new FormGroup({
-      empname: this.empname,
-      empemail: this.empemail,
-      empcity: this.empcity
-    })
-  }
-  constructor(){
-    this.createFormControls()
-    this.createForm()
-  }
-  addUser() {
-    console.log(this.myForm.value);
-    
-
-  }
-}
