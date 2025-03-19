@@ -1,60 +1,43 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-@Component({
-  selector: 'app-reactiveapp',
-  standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
-  templateUrl: './reactiveapp.component.html',
-  styleUrl: './reactiveapp.component.css'
-})
-export class ReactiveappComponent {
-  myForm: FormGroup
-  empname: FormControl
-  empemail: FormControl
-  empcity: FormControl
-
-  createFormControls() {
-    this.empname = new FormControl('')
-    this.empemail = new FormControl('')
-    this.empcity = new FormControl('')
-  }
-  createForm() {
-    this.myForm = new FormGroup({
-      empname: this.empname,
-      empemail: this.empemail,
-      empcity: this.empcity
-    })
-  }
-  constructor(){
-    this.createFormControls()
-    this.createForm()
-  }
-  addUser() {
-
-  }
-}
-
-
----------
-
 <div class="bg-gray-100 p-10">
     <div class="max-w-lg mx-auto  bg-white p-6 rounded-lg shadow-md">
 
         <h4 style="text-align: center;" class="font-bold mb-4">Employee CRUD Application</h4>
 
         <div class="mb-4">
-            <form (ngSubmit)="addUser()">
-                <input type="text" name="empname" class="w-full p-2 rounded mb-2" placeholder="Enter Employee Name">
+            <form (ngSubmit)="addUser()" [formGroup]="myForm">
+                <input type="text" name="empname" class="w-full p-2 rounded mb-2" formControlName="empname"
+                    placeholder="Enter Employee Name">
+
+                <div *ngIf="empname.invalid &&( empname.dirty || empname.touched)">
+                    <div *ngIf="empname.hasError('required')">
+                        <p>Name cant be empty</p>
+                    </div>
+
+                </div>
+                <input type="email" class="w-full p-2 rounded mb-2" placeholder="Enter Email"
+                    formControlName="empemail">
+
+                <div *ngIf="empemail.invalid &&( empemail.dirty || empemail.touched)">
+                    <div *ngIf="empemail.hasError('required')">
+                        <p>Email cant be empty</p>
+                    </div>
+                    <div *ngIf="empemail.hasError('email')">
+                        <p>Email must be formatted</p>
+                    </div>
+                </div>
+                <input type="text" class="w-full p-2 rounded mb-2" placeholder="Enter Employee city"
+                    formControlName="empcity">
 
 
-                <input type="email" class="w-full p-2 rounded mb-2" placeholder="Enter Email">
-
-
-                <input type="text" class="w-full p-2 rounded mb-2" placeholder="Enter Employee city">
-
-                <button class="mt-2 w-full bg-blue-600 p-2 rounded">Add Employee</button>
+                <div *ngIf="empcity.invalid &&( empcity.dirty || empcity.touched)">
+                    <div *ngIf="empcity.hasError('required')">
+                        <p>city cant be empty</p>
+                    </div>
+                    <div *ngIf="empcity.hasError('minlength')">
+                        <p>cit must be 6 char long</p>
+                    </div>
+                </div>
+                <button [disabled]="myForm.invalid" class="mt-2 w-full bg-blue-600 p-2 rounded">Add Employee</button>
 
             </form>
         </div>
@@ -78,3 +61,45 @@ export class ReactiveappComponent {
 
 
 </div>
+------------
+
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-reactiveapp',
+  standalone: true,
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  templateUrl: './reactiveapp.component.html',
+  styleUrl: './reactiveapp.component.css'
+})
+export class ReactiveappComponent {
+  myForm: FormGroup
+  empname: FormControl
+  empemail: FormControl
+  empcity: FormControl
+
+  createFormControls() {
+    this.empname = new FormControl('',Validators.required)
+    this.empemail = new FormControl('',[Validators.required,Validators.email])
+    this.empcity = new FormControl('',[Validators.required,Validators.minLength(6)])
+  }
+  createForm() {
+    this.myForm = new FormGroup({
+      empname: this.empname,
+      empemail: this.empemail,
+      empcity: this.empcity
+    })
+  }
+  constructor(){
+    this.createFormControls()
+    this.createForm()
+  }
+  addUser() {
+    console.log(this.myForm.value);
+    
+
+  }
+}
