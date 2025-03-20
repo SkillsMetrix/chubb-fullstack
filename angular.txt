@@ -92,3 +92,25 @@ export class RegisterComponent {
 
 
 </div>
+
+
+
+------
+
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a routerLink="login" class="nav-link active">Login</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="register" class="nav-link active">Register</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="userdetails" class="nav-link active">UserDetails</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="portfolio" class="nav-link active">Portfolio</a>
+        </li>
+    </ul>
+</div>
+
