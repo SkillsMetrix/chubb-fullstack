@@ -1,3 +1,44 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
+})
+export class RegisterComponent {
+  myForm: FormGroup
+  empName: FormControl
+  empEmail: FormControl
+  empCity: FormControl
+
+  createFormControls() {
+    this.empName = new FormControl('', Validators.required)
+    this.empEmail = new FormControl('', [Validators.required, Validators.email])
+    this.empCity = new FormControl('', [Validators.required, Validators.minLength(6)])
+  }
+  createForm() {
+    this.myForm = new FormGroup({
+      empName: this.empName,
+      empEmail: this.empEmail,
+      empCity: this.empCity
+    })
+  }
+  users: any[] = []
+  constructor() {
+
+    this.createFormControls()
+    this.createForm()
+    
+  }
+  addUser() {
+
+   
+
+  }
+}
+------
+
 <div class="bg-gray-100 p-10">
     <div class="max-w-lg mx-auto  bg-white p-6 rounded-lg shadow-md">
 
@@ -51,47 +92,3 @@
 
 
 </div>
-
-
-----------
-
-
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-@Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
-})
-export class RegisterComponent {
-  myForm: FormGroup
-  empName: FormControl
-  empEmail: FormControl
-  empCity: FormControl
-
-  createFormControls() {
-    this.empName = new FormControl('', Validators.required)
-    this.empEmail = new FormControl('', [Validators.required, Validators.email])
-    this.empCity = new FormControl('', [Validators.required, Validators.minLength(6)])
-  }
-  createForm() {
-    this.myForm = new FormGroup({
-      empName: this.empName,
-      empEmail: this.empEmail,
-      empCity: this.empCity
-    })
-  }
-  users: any[] = []
-  constructor() {
-
-    this.createFormControls()
-    this.createForm()
-    
-  }
-  addUser() {
-
-   
-
-  }
-}
