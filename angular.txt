@@ -1,43 +1,90 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Student } from '../../models/student';
+import { StudentService } from '../../services/student.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  selector: 'app-studentapp',
+  templateUrl: './studentapp.component.html',
+  styleUrl: './studentapp.component.css'
 })
-export class RegisterComponent {
+export class StudentappComponent {
+
   myForm: FormGroup
-  empName: FormControl
-  empEmail: FormControl
-  empCity: FormControl
+  name: FormControl
+  age: FormControl
+  grade: FormControl
+
+  students: Student[] = []
+
+
 
   createFormControls() {
-    this.empName = new FormControl('', Validators.required)
-    this.empEmail = new FormControl('', [Validators.required, Validators.email])
-    this.empCity = new FormControl('', [Validators.required, Validators.minLength(6)])
+    this.name = new FormControl('', Validators.required)
+    this.age = new FormControl('', [Validators.required,])
+    this.grade = new FormControl('', [Validators.required])
   }
   createForm() {
     this.myForm = new FormGroup({
-      empName: this.empName,
-      empEmail: this.empEmail,
-      empCity: this.empCity
+      name: this.name,
+      age: this.age,
+      grade: this.grade
     })
   }
   users: any[] = []
-  constructor() {
+  constructor(private ss: StudentService) {
 
     this.createFormControls()
     this.createForm()
-    
-  }
-  addUser() {
 
-   
+  }
+  id: number
+
+  addUser() {
+    const newstudent: Student = this.myForm.value
+    newstudent.id = this.ss.generateAutoID()
+    this.ss.addStudent(newstudent)
+
 
   }
 }
-------
+
+-----------
+
+
+import { Injectable } from '@angular/core';
+import { Student } from '../models/student';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+
+  private readonly storageKey = 'students'
+
+  getStudentsData(): Student[] {
+    const studentData = localStorage.getItem(this.storageKey)
+    return studentData ? JSON.parse(studentData) : []
+
+  }
+  addStudent(student: Student) {
+    const studentData = this.getStudentsData()
+    console.log(studentData);
+    
+    
+    
+    localStorage.setItem(this.storageKey, JSON.stringify(student))
+  }
+  generateAutoID(): number {
+    const studentData = this.getStudentsData()
+    return studentData.length > 0 ? Math.max(...studentData.map((data) => data.id)) + 1 : 1
+  }
+
+  constructor() { }
+}
+
+
+--------
 
 <div class="bg-gray-100 p-10">
     <div class="max-w-lg mx-auto  bg-white p-6 rounded-lg shadow-md">
@@ -46,37 +93,33 @@ export class RegisterComponent {
 
         <div class="mb-4">
             <form (ngSubmit)="addUser()" [formGroup]="myForm">
-                <input type="text" name="empname" class="w-full p-2 rounded mb-2" formControlName="empName"
+                <input type="text" name="empname" class="w-full p-2 rounded mb-2" formControlName="name"
                     placeholder="Enter Employee Name">
 
-                <div *ngIf="empName.invalid &&( empName.dirty || empName.touched)">
-                    <div *ngIf="empName.hasError('required')">
+                <div *ngIf="name.invalid &&( name.dirty || name.touched)">
+                    <div *ngIf="name.hasError('required')">
                         <p>Name cant be empty</p>
                     </div>
 
                 </div>
-                <input type="email" class="w-full p-2 rounded mb-2" placeholder="Enter Email"
-                    formControlName="empEmail">
+                <input type="number" class="w-full p-2 rounded mb-2" placeholder="Enter Age"
+                    formControlName="age">
 
-                <div *ngIf="empEmail.invalid &&( empEmail.dirty || empEmail.touched)">
-                    <div *ngIf="empEmail.hasError('required')">
-                        <p>Email cant be empty</p>
+                <div *ngIf="age.invalid &&( age.dirty || age.touched)">
+                    <div *ngIf="age.hasError('required')">
+                        <p>age cant be empty</p>
                     </div>
-                    <div *ngIf="empEmail.hasError('email')">
-                        <p>Email must be formatted</p>
-                    </div>
+                   
                 </div>
-                <input type="text" class="w-full p-2 rounded mb-2" placeholder="Enter Employee city"
-                    formControlName="empCity">
+                <input type="text" class="w-full p-2 rounded mb-2" placeholder="Enter Grade"
+                    formControlName="grade">
 
 
-                <div *ngIf="empCity.invalid &&( empCity.dirty || empCity.touched)">
-                    <div *ngIf="empCity.hasError('required')">
-                        <p>city cant be empty</p>
+                <div *ngIf="grade.invalid &&( grade.dirty || grade.touched)">
+                    <div *ngIf="grade.hasError('required')">
+                        <p>Grade cant be empty</p>
                     </div>
-                    <div *ngIf="empCity.hasError('minlength')">
-                        <p>cit must be 6 char long</p>
-                    </div>
+                   
                 </div>
                 <button [disabled]="myForm.invalid" class="mt-2 w-full bg-blue-600 p-2 rounded">Add Employee</button>
 
@@ -92,25 +135,3 @@ export class RegisterComponent {
 
 
 </div>
-
-
-
-------
-
-<div class="container">
-    <ul class="nav">
-        <li class="nav-item">
-            <a routerLink="login" class="nav-link active">Login</a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="register" class="nav-link active">Register</a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="userdetails" class="nav-link active">UserDetails</a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="portfolio" class="nav-link active">Portfolio</a>
-        </li>
-    </ul>
-</div>
-
