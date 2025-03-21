@@ -36,6 +36,7 @@ export class StudentappComponent {
 
     this.createFormControls()
     this.createForm()
+    this.loadUsers()
 
   }
   id: number
@@ -47,42 +48,18 @@ export class StudentappComponent {
 
 
   }
+  loadUsers() {
+    const data = this.ss.getStudentsData()
+    const myarray = []
+    for (let key in data) {
+      myarray.push(data[key])
+    }
+    this.students = myarray
+
+    console.log(this.students);
+
+  }
 }
-
------------
-
-
-import { Injectable } from '@angular/core';
-import { Student } from '../models/student';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class StudentService {
-
-  private readonly storageKey = 'students'
-
-  getStudentsData(): Student[] {
-    const studentData = localStorage.getItem(this.storageKey)
-    return studentData ? JSON.parse(studentData) : []
-
-  }
-  addStudent(student: Student) {
-    const studentData = this.getStudentsData()
-    console.log(studentData);
-    
-    
-    
-    localStorage.setItem(this.storageKey, JSON.stringify(student))
-  }
-  generateAutoID(): number {
-    const studentData = this.getStudentsData()
-    return studentData.length > 0 ? Math.max(...studentData.map((data) => data.id)) + 1 : 1
-  }
-
-  constructor() { }
-}
-
 
 --------
 
@@ -126,6 +103,11 @@ export class StudentService {
             </form>
         </div>
 
+        <ul>
+            <li *ngFor="let student of students">
+                {{student}}
+            </li>
+        </ul>
         
     </div>
 
